@@ -2,7 +2,7 @@ package geometry;
 
 import java.awt.Graphics;
 
-import gui.DlgRectangle;
+import drawingGui.DlgRectangle;
 
 public class Rectangle extends Shape {
 	private Point upperLeft;
