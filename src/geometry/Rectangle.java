@@ -20,7 +20,7 @@ public class Rectangle extends Shape {
 	@Override
 	public String toString() {
 		return "Upper left point : (" + this.upperLeft.getX() + ", " + this.upperLeft.getY()
-		+ "), width = " + getWidth() + " height = " + this.height; 
+		+ "), width = " + this.width + " height = " + this.height; 
 	}
 	
 	@Override 
