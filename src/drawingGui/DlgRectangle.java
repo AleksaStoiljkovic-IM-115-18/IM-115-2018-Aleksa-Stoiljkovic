@@ -140,7 +140,6 @@ public class DlgRectangle extends JDialog {
 								rectangle.setHeight(height);
 								rectangle.setWidth(width);
 								rectangle.setUpperLeft(new Point(upperX, upperY));
-								dlgWidth = Integer.parseInt(textFieldWidth.getText());
 								commited = true;
 								dispose();
 							}
