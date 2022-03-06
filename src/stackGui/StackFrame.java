@@ -29,9 +29,26 @@ import javax.swing.JTextField;
 @SuppressWarnings("serial")
 public class StackFrame extends JFrame {
 
+	private int x;
+	public int getX() {
+		return x;
+	}
+
+	public void setX(int x) {
+		this.x = x;
+	}
+
 	private JPanel contentPane;
 	private static ArrayList<Rectangle> rects = new ArrayList<Rectangle>();
 	private JTextField textField;
+
+	public static ArrayList<Rectangle> getRects() {
+		return rects;
+	}
+
+	public static void setRects(ArrayList<Rectangle> rects) {
+		StackFrame.rects = rects;
+	}
 
 	/**
 	 * Launch the application.
@@ -75,7 +92,7 @@ public class StackFrame extends JFrame {
 		gbc_list.gridx = 1;
 		gbc_list.gridy = 0;
 		contentPane.add(list, gbc_list);
-		
+						
 		DefaultListModel model = new DefaultListModel();
 		
 		JButton btnAdd = new JButton("Add");
@@ -83,11 +100,11 @@ public class StackFrame extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				
 				Rectangle newRectangle = null;
-					DlgRectangle dlg = new DlgRectangle();
+					DlgAdd dlg = new DlgAdd();
 					dlg.setModal(true);
 					dlg.setRectangle(new Rectangle(new Point(-1, -1), -1, -1));
 					dlg.setVisible(true);
-					if (!dlg.isCommited()) {
+					if (!dlg.isAddCommited()) {
 						return;
 					}
 					try {
@@ -100,11 +117,13 @@ public class StackFrame extends JFrame {
 					rects.add(newRectangle);
 					model.addElement(newRectangle.toString());
 					list.setModel(model);
+					x = newRectangle.getUpperLeft().getX();
 				}
 				
 			}
 		});
 		GridBagConstraints gbc_btnAdd = new GridBagConstraints();
+		gbc_btnAdd.fill = GridBagConstraints.HORIZONTAL;
 		gbc_btnAdd.insets = new Insets(0, 0, 5, 5);
 		gbc_btnAdd.gridx = 0;
 		gbc_btnAdd.gridy = 0;
@@ -113,7 +132,23 @@ public class StackFrame extends JFrame {
 		
 		
 		JButton btnDelete = new JButton("Delete");
+		btnDelete.addActionListener(new ActionListener() {
+			@SuppressWarnings("static-access")
+			public void actionPerformed(ActionEvent e) {
+				
+				DlgDlt dlg = new DlgDlt();
+				dlg.setModal(true);
+				dlg.setRectangle(rects.get(list.getSelectedIndex()));
+				dlg.setVisible(true);
+				if (!dlg.isDltCommited()) {
+					rects.remove(list.getSelectedIndex());
+					model.removeElementAt(list.getSelectedIndex());
+					return;
+				}
+			}
+		});
 		GridBagConstraints gbc_btnDelete = new GridBagConstraints();
+		gbc_btnDelete.fill = GridBagConstraints.HORIZONTAL;
 		gbc_btnDelete.insets = new Insets(0, 0, 5, 5);
 		gbc_btnDelete.gridx = 0;
 		gbc_btnDelete.gridy = 1;
