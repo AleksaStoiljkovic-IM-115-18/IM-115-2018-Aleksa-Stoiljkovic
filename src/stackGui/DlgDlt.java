@@ -32,7 +32,8 @@ public class DlgDlt extends JDialog {
 	private JTextField textFieldUpperLeftY;
 	static JTextField textFieldWidth;
 	private JTextField textFieldHeight;
-	static Rectangle rectangle;
+	private int index;
+	static Rectangle dltRectangle;
 
 	/**
 	 * Launch the application.
@@ -72,15 +73,15 @@ public class DlgDlt extends JDialog {
 		}
 		{
 			textFieldUpperLeftX = new JTextField();
-			if(rectangle != null) {
-				if(rectangle.getUpperLeft().getX() == -1) {
-					textFieldUpperLeftX.setText("");
-				}
-				
-				else {
-					textFieldUpperLeftX.setText(String.valueOf(rectangle.getUpperLeft().getX()));
-				}
+			textFieldUpperLeftX.setEditable(false);
+			try {
+				textFieldUpperLeftX.setText(StackFrame.getTextFieldX().getText());
 			}
+			
+			catch(Exception ex) {
+				JOptionPane.showMessageDialog(null, "Wrong data entry", "Error", JOptionPane.ERROR_MESSAGE);
+			}
+			textFieldUpperLeftX.setEditable(false);
 			GridBagConstraints gbc_textFieldUpperLeftX = new GridBagConstraints();
 			gbc_textFieldUpperLeftX.insets = new Insets(0, 0, 5, 0);
 			gbc_textFieldUpperLeftX.fill = GridBagConstraints.HORIZONTAL;
@@ -100,14 +101,13 @@ public class DlgDlt extends JDialog {
 		}
 		{
 			textFieldUpperLeftY = new JTextField();
-			if(rectangle != null) {
-				if(rectangle.getUpperLeft().getX() == -1) {
-					textFieldWidth.setText("");
-				}
-				
-				else {
-					textFieldWidth.setText(String.valueOf(rectangle.getUpperLeft().getX()));
-				}
+			textFieldUpperLeftY.setEditable(false);
+			try {
+				textFieldUpperLeftY.setText(StackFrame.getTextFieldY().getText());
+			}
+			
+			catch(Exception ex) {
+				JOptionPane.showMessageDialog(null, "Wrong data entry", "Error", JOptionPane.ERROR_MESSAGE);
 			}
 			GridBagConstraints gbc_textFieldUpperLeftY = new GridBagConstraints();
 			gbc_textFieldUpperLeftY.insets = new Insets(0, 0, 5, 0);
@@ -145,31 +145,8 @@ public class DlgDlt extends JDialog {
 				JButton okButton = new JButton("OK");
 				okButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
-						try {
-							int height = Integer.parseInt(textFieldHeight.getText());
-							int width = Integer.parseInt(textFieldWidth.getText());
-							int upperX = Integer.parseInt(textFieldUpperLeftX.getText());
-							int upperY = Integer.parseInt(textFieldUpperLeftY.getText());
-							
-							if(height>0 && width>0 && upperX>0 && upperY>0) {
-								rectangle.setHeight(height);
-								rectangle.setWidth(width);
-								rectangle.setUpperLeft(new Point(upperX, upperY));
-								dltCommited = true;
-								dispose();
-							}
-							
-							else {
-								JOptionPane.showMessageDialog(null, "Wrong data entry", "Error", JOptionPane.ERROR_MESSAGE);
-							}
-						}
-						
-						catch(Exception ex) {
-							JOptionPane.showMessageDialog(null, "Wrong data entry", "Error", JOptionPane.ERROR_MESSAGE);
-						}
-						
-						
-						
+						dltCommited = true;
+						dispose();
 					}
 				});
 				okButton.setActionCommand("OK");
@@ -179,6 +156,14 @@ public class DlgDlt extends JDialog {
 			
 			{
 				textFieldWidth = new JTextField();
+				textFieldWidth.setEditable(false);
+				try {
+					textFieldWidth.setText(StackFrame.getTextFieldWidth().getText());
+				}
+				
+				catch(Exception ex) {
+					JOptionPane.showMessageDialog(null, "Wrong data entry", "Error", JOptionPane.ERROR_MESSAGE);
+				}
 				GridBagConstraints gbc_textFieldWidth = new GridBagConstraints();
 				gbc_textFieldWidth.insets = new Insets(0, 0, 5, 0);
 				gbc_textFieldWidth.fill = GridBagConstraints.HORIZONTAL;
@@ -190,6 +175,14 @@ public class DlgDlt extends JDialog {
 			
 			{
 				textFieldHeight = new JTextField();
+				try {
+					textFieldHeight.setText(StackFrame.getTextFieldHeight().getText());
+				}
+				
+				catch(Exception ex) {
+					JOptionPane.showMessageDialog(null, "Wrong data entry", "Error", JOptionPane.ERROR_MESSAGE);
+				}
+				textFieldHeight.setEditable(false);
 				GridBagConstraints gbc_textFieldHeight = new GridBagConstraints();
 				gbc_textFieldHeight.insets = new Insets(0, 0, 5, 0);
 				gbc_textFieldHeight.fill = GridBagConstraints.HORIZONTAL;
@@ -215,17 +208,23 @@ public class DlgDlt extends JDialog {
 
 	//Get and set methods
 
-	public void setRectangle(Rectangle rectangle) {
-		this.rectangle = rectangle;
-	}
-	public Shape getRectangle() {
-		return rectangle;
-	}
 	public boolean isDltCommited() {
 		return dltCommited;
 	}
 	public void setDltCommited(boolean addCommited) {
 		this.dltCommited = addCommited;
+	}
+	public static Rectangle getDltRectangle() {
+		return dltRectangle;
+	}
+	public static void setDltRectangle(Rectangle dltRectangle) {
+		DlgDlt.dltRectangle = dltRectangle;
+	}
+	public int getIndex() {
+		return index;
+	}
+	public void setIndex(int index) {
+		this.index = index;
 	}
 
 }

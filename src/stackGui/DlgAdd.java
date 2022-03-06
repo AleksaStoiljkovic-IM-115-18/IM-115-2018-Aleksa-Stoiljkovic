@@ -218,7 +218,7 @@ public class DlgAdd extends JDialog {
 	public void setRectangle(Rectangle rectangle) {
 		this.rectangle = rectangle;
 	}
-	public Shape getRectangle() {
+	public Rectangle getRectangle() {
 		return rectangle;
 	}
 	public boolean isAddCommited() {
