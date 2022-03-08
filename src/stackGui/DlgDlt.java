@@ -32,8 +32,6 @@ public class DlgDlt extends JDialog {
 	private JTextField textFieldUpperLeftY;
 	static JTextField textFieldWidth;
 	private JTextField textFieldHeight;
-	private int index;
-	static Rectangle dltRectangle;
 
 	/**
 	 * Launch the application.
@@ -214,17 +212,5 @@ public class DlgDlt extends JDialog {
 	public void setDltCommited(boolean addCommited) {
 		this.dltCommited = addCommited;
 	}
-	public static Rectangle getDltRectangle() {
-		return dltRectangle;
-	}
-	public static void setDltRectangle(Rectangle dltRectangle) {
-		DlgDlt.dltRectangle = dltRectangle;
-	}
-	public int getIndex() {
-		return index;
-	}
-	public void setIndex(int index) {
-		this.index = index;
-	}
-
+	
 }

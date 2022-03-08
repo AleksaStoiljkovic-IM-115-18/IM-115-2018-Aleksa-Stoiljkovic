@@ -2,17 +2,14 @@ package stackGui;
 
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
-import java.awt.Color;
 
 import javax.swing.JButton;
-import javax.swing.JColorChooser;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import geometry.Point;
 import geometry.Rectangle;
-import geometry.Shape;
 
 import java.awt.GridBagLayout;
 import javax.swing.JLabel;
@@ -70,17 +67,9 @@ public class DlgAdd extends JDialog {
 			gbc_lblUpperLeftX.gridy = 0;
 			contentPanel.add(lblUpperLeftX, gbc_lblUpperLeftX);
 		}
+
 		{
 			textFieldUpperLeftX = new JTextField();
-			if(rectangle != null) {
-				if(rectangle.getUpperLeft().getX() == -1) {
-					textFieldWidth.setText("");
-				}
-				
-				else {
-					textFieldWidth.setText(String.valueOf(rectangle.getUpperLeft().getX()));
-				}
-			}
 			GridBagConstraints gbc_textFieldUpperLeftX = new GridBagConstraints();
 			gbc_textFieldUpperLeftX.insets = new Insets(0, 0, 5, 0);
 			gbc_textFieldUpperLeftX.fill = GridBagConstraints.HORIZONTAL;
@@ -89,6 +78,7 @@ public class DlgAdd extends JDialog {
 			contentPanel.add(textFieldUpperLeftX, gbc_textFieldUpperLeftX);
 			textFieldUpperLeftX.setColumns(10);
 		}
+
 		{
 			JLabel lblUpperLeftY = new JLabel("Upper Left Y:");
 			GridBagConstraints gbc_lblUpperLeftY = new GridBagConstraints();
@@ -98,17 +88,9 @@ public class DlgAdd extends JDialog {
 			gbc_lblUpperLeftY.gridy = 1;
 			contentPanel.add(lblUpperLeftY, gbc_lblUpperLeftY);
 		}
+
 		{
 			textFieldUpperLeftY = new JTextField();
-			if(rectangle != null) {
-				if(rectangle.getUpperLeft().getX() == -1) {
-					textFieldWidth.setText("");
-				}
-				
-				else {
-					textFieldWidth.setText(String.valueOf(rectangle.getUpperLeft().getX()));
-				}
-			}
 			GridBagConstraints gbc_textFieldUpperLeftY = new GridBagConstraints();
 			gbc_textFieldUpperLeftY.insets = new Insets(0, 0, 5, 0);
 			gbc_textFieldUpperLeftY.fill = GridBagConstraints.HORIZONTAL;
@@ -117,6 +99,7 @@ public class DlgAdd extends JDialog {
 			contentPanel.add(textFieldUpperLeftY, gbc_textFieldUpperLeftY);
 			textFieldUpperLeftY.setColumns(10);
 		}
+
 		{
 			JLabel lblWidth = new JLabel("Width:");
 			GridBagConstraints gbc_lblWidth = new GridBagConstraints();
@@ -163,13 +146,9 @@ public class DlgAdd extends JDialog {
 								JOptionPane.showMessageDialog(null, "Wrong data entry", "Error", JOptionPane.ERROR_MESSAGE);
 							}
 						}
-						
 						catch(Exception ex) {
 							JOptionPane.showMessageDialog(null, "Wrong data entry", "Error", JOptionPane.ERROR_MESSAGE);
 						}
-						
-						
-						
 					}
 				});
 				okButton.setActionCommand("OK");

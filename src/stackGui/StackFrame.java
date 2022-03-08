@@ -126,8 +126,8 @@ public class StackFrame extends JFrame {
 				dlg.setRectangle(new Rectangle(new Point(-1, -1), -1, -1));
 				dlg.setVisible(true);
 				if(dlg.isAddCommited()) {
-					rects.add(dlg.getRectangle());
-					model.addElement(dlg.getRectangle());
+					rects.add(0, dlg.getRectangle());
+					model.add(0, dlg.getRectangle());
 					list.setModel(model);
 				}
 			}
@@ -147,6 +147,7 @@ public class StackFrame extends JFrame {
 				dlg.setModal(true);
 				dlg.setVisible(true);
 				if(dlg.isDltCommited()) {
+					rects.remove(list.getSelectedIndex());
 					model.remove(list.getSelectedIndex());
 					list.setModel(model);
 					textFieldX.setText("");
