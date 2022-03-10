@@ -1,4 +1,4 @@
-package stackGui;
+package sortGui;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
@@ -22,6 +22,8 @@ import javax.swing.JOptionPane;
 
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Iterator;
 import java.awt.event.ActionEvent;
 import javax.swing.JTextField;
@@ -30,16 +32,9 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.JLabel;
 
 @SuppressWarnings("serial")
-public class StackFrame extends JFrame {
+public class SortFrame extends JFrame {
 
 	private int index;
-	public int getIndex() {
-		return index;
-	}
-
-	public void setIndex(int index) {
-		this.index = index;
-	}
 	private JPanel contentPane;
 	private static ArrayList<Rectangle> rects = new ArrayList<Rectangle>();
 	private static JTextField textFieldX;
@@ -50,6 +45,7 @@ public class StackFrame extends JFrame {
 	private JLabel lblNewLabel_1;
 	private JLabel lblNewLabel_2;
 	private JLabel lblNewLabel_3;
+	private JButton btnSort;
 
 	/**
 	 * Launch the application.
@@ -58,7 +54,7 @@ public class StackFrame extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					StackFrame frame = new StackFrame();
+					SortFrame frame = new SortFrame();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -71,7 +67,7 @@ public class StackFrame extends JFrame {
 	 * Create the frame.
 	 */
 	@SuppressWarnings({ "unchecked", "rawtypes" })
-	public StackFrame() {
+	public SortFrame() {
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
@@ -117,11 +113,10 @@ public class StackFrame extends JFrame {
 		gbc_list.gridy = 0;
 		contentPane.add(list, gbc_list);
 						
-		
 		JButton btnAdd = new JButton("Add");
 		btnAdd.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				DlgAdd dlg = new DlgAdd();
+				DlgAddSort dlg = new DlgAddSort();
 				dlg.setModal(true);
 				dlg.setRectangle(new Rectangle(new Point(-1, -1), -1, -1));
 				dlg.setVisible(true);
@@ -143,7 +138,7 @@ public class StackFrame extends JFrame {
 		btnDelete.addActionListener(new ActionListener() {
 			@SuppressWarnings("static-access")
 			public void actionPerformed(ActionEvent e) {
-				DlgDlt dlg = new DlgDlt();
+				DlgDltSort dlg = new DlgDltSort();
 				dlg.setModal(true);
 				dlg.setVisible(true);
 				if(dlg.isDltCommited()) {
@@ -163,6 +158,33 @@ public class StackFrame extends JFrame {
 		gbc_btnDelete.gridx = 0;
 		gbc_btnDelete.gridy = 1;
 		contentPane.add(btnDelete, gbc_btnDelete);
+		
+		btnSort = new JButton("Sort By Area");
+		btnSort.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Collections.sort(rects, new Comparator<Rectangle>() {
+					public int compare(Rectangle r1, Rectangle r2) {
+						return Integer.valueOf(r1.area()).compareTo(r2.area());
+					}
+				});
+				
+				int rCount;
+				for(rCount=0; rCount<rects.size(); rCount++) {
+					model.removeAllElements();
+					
+					for(int i=0; i<rects.size(); i++) {
+						model.add(i, rects.get(i));
+						list.setModel(model);
+					}
+				}
+			}
+		});
+		GridBagConstraints gbc_btnSort = new GridBagConstraints();
+		gbc_btnSort.fill = GridBagConstraints.HORIZONTAL;
+		gbc_btnSort.insets = new Insets(0, 0, 5, 5);
+		gbc_btnSort.gridx = 0;
+		gbc_btnSort.gridy = 2;
+		contentPane.add(btnSort, gbc_btnSort);
 		
 		lblNewLabel = new JLabel("Upper Left X:");
 		GridBagConstraints gbc_lblNewLabel = new GridBagConstraints();
@@ -238,23 +260,18 @@ public class StackFrame extends JFrame {
 	public static JTextField getTextFieldY() {
 		return textFieldY;
 	}
-
 	public void setTextFieldY(JTextField textFieldY) {
 		this.textFieldY = textFieldY;
 	}
-
 	public static JTextField getTextFieldWidth() {
 		return textFieldWidth;
 	}
-
 	public void setTextFieldWidth(JTextField textFieldWidth) {
 		this.textFieldWidth = textFieldWidth;
 	}
-
 	public static JTextField getTextFieldHeight() {
 		return textFieldHeight;
 	}
-
 	public void setTextFieldHeight(JTextField textFieldHeight) {
 		this.textFieldHeight = textFieldHeight;
 	}
@@ -268,7 +285,13 @@ public class StackFrame extends JFrame {
 		return rects;
 	}
 	public static void setRects(ArrayList<Rectangle> rects) {
-		StackFrame.rects = rects;
+		SortFrame.rects = rects;
+	}
+	public int getIndex() {
+		return index;
+	}
+	public void setIndex(int index) {
+		this.index = index;
 	}
 
 }
