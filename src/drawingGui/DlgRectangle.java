@@ -35,6 +35,33 @@ public class DlgRectangle extends JDialog {
 	private JTextField textFieldHeight;
 	static Rectangle rectangle;
 
+	public JTextField getTextFieldUpperLeftX() {
+		return textFieldUpperLeftX;
+	}
+
+	public void setTextFieldUpperLeftX(JTextField textFieldUpperLeftX) {
+		this.textFieldUpperLeftX = textFieldUpperLeftX;
+	}
+
+	public JTextField getTextFieldUpperLeftY() {
+		return textFieldUpperLeftY;
+	}
+
+	public void setTextFieldUpperLeftY(JTextField textFieldUpperLeftY) {
+		this.textFieldUpperLeftY = textFieldUpperLeftY;
+	}
+
+	public JTextField getTextFieldHeight() {
+		return textFieldHeight;
+	}
+
+	public void setTextFieldHeight(JTextField textFieldHeight) {
+		this.textFieldHeight = textFieldHeight;
+	}
+	public JTextField getTextFieldWidth() {
+		return textFieldWidth;
+	}
+	
 	/**
 	 * Launch the application.
 	 */

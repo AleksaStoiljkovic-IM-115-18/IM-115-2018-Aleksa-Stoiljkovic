@@ -3,6 +3,7 @@ package drawingGui;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 
+import javax.swing.AbstractButton;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
@@ -68,15 +69,15 @@ public class DlgLine extends JDialog {
 			contentPanel.add(lblStartPointX, gbc_lblStartPointX);
 		}
 		{
-			textFieldStartPointX = new JTextField();
-			textFieldStartPointX.setText(String.valueOf(DrawingPanel.getLineStartPointX()));
+			setTextFieldStartPointX(new JTextField());
+			getTextFieldStartPointX().setText(String.valueOf(DrawingPanel.getLineStartPointX()));
 			GridBagConstraints gbc_textFieldStartPointX = new GridBagConstraints();
 			gbc_textFieldStartPointX.insets = new Insets(0, 0, 5, 0);
 			gbc_textFieldStartPointX.fill = GridBagConstraints.HORIZONTAL;
 			gbc_textFieldStartPointX.gridx = 1;
 			gbc_textFieldStartPointX.gridy = 0;
-			contentPanel.add(textFieldStartPointX, gbc_textFieldStartPointX);
-			textFieldStartPointX.setColumns(10);
+			contentPanel.add(getTextFieldStartPointX(), gbc_textFieldStartPointX);
+			getTextFieldStartPointX().setColumns(10);
 		}
 		{
 			JLabel lblStartPointY = new JLabel("Start Point Y:");
@@ -146,7 +147,7 @@ public class DlgLine extends JDialog {
 				okButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						try {
-							int	startX = Integer.parseInt(textFieldStartPointX.getText());
+							int	startX = Integer.parseInt(getTextFieldStartPointX().getText());
 							int	startY = Integer.parseInt(textFieldStartPointY.getText());
 							int endX = Integer.parseInt(textFieldEndPointX.getText());
 							int endY = Integer.parseInt(textFieldEndPointY.getText());
@@ -197,6 +198,38 @@ public class DlgLine extends JDialog {
 	}
 	public static Line getLine() {
 		return line;
+	}
+
+	public JTextField getTextFieldStartPointX() {
+		return textFieldStartPointX;
+	}
+	public JTextField getTextFieldStartPointY() {
+		return textFieldStartPointY;
+	}
+
+	public void setTextFieldStartPointX(JTextField textFieldStartPointX) {
+		this.textFieldStartPointX = textFieldStartPointX;
+	}
+
+
+	public JTextField getTextFieldEndPointX() {
+		return textFieldEndPointX;
+	}
+
+	public void setTextFieldEndPointX(JTextField textFieldEndPointX) {
+		this.textFieldEndPointX = textFieldEndPointX;
+	}
+
+	public JTextField getTextFieldEndPointY() {
+		return textFieldEndPointY;
+	}
+
+	public void setTextFieldEndPointY(JTextField textFieldEndPointY) {
+		this.textFieldEndPointY = textFieldEndPointY;
+	}
+
+	public void setTextFieldStartPointY(JTextField textFieldStartPointY) {
+		this.textFieldStartPointY = textFieldStartPointY;
 	}
 
 }

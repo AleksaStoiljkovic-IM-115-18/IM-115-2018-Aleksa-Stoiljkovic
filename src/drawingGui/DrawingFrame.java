@@ -50,30 +50,47 @@ public class DrawingFrame extends JFrame {
 				Point point = (Point) selected;
 				DlgPoint dlg = new DlgPoint();
 				dlg.setPoint(point);
+				dlg.textFieldPointX.setText(String.valueOf(point.getX()));
+				dlg.getTextFieldPointY().setText(String.valueOf(point.getY()));
 				dlg.setModal(true);
 				dlg.setVisible(true);
 			} else if(selected instanceof Line) {
 				Line line = (Line) selected;
 				DlgLine dlg = new DlgLine();
 				dlg.setLine(line);
+				dlg.getTextFieldStartPointX().setText(String.valueOf(line.getStartPoint().getX()));
+				dlg.getTextFieldStartPointY().setText(String.valueOf(line.getStartPoint().getY()));
+				dlg.getTextFieldEndPointX().setText(String.valueOf(line.getEndPoint().getX()));
+				dlg.getTextFieldEndPointY().setText(String.valueOf(line.getEndPoint().getY()));
 				dlg.setModal(true);
 				dlg.setVisible(true);
 			} else if(selected instanceof Rectangle) {
 				Rectangle rect = (Rectangle) selected;
 				DlgRectangle dlg = new DlgRectangle();
 				dlg.setRectangle(rect);
+				dlg.getTextFieldUpperLeftX().setText(String.valueOf(rect.getUpperLeft().getX()));
+				dlg.getTextFieldUpperLeftY().setText(String.valueOf(rect.getUpperLeft().getY()));
+				dlg.getTextFieldWidth().setText(String.valueOf(rect.getWidth()));
+				dlg.getTextFieldHeight().setText(String.valueOf(rect.getHeight()));
 				dlg.setModal(true);
 				dlg.setVisible(true);
 			} else if(selected instanceof Donut) {
 				Donut donut = (Donut) selected;
 				DlgDonut dlg = new DlgDonut();
 				dlg.setDonut(donut);
+				dlg.getTextFieldDonutCenterX().setText(String.valueOf(donut.getCenter().getX()));
+				dlg.getTextFieldDonutCenterY().setText(String.valueOf(donut.getCenter().getY()));
+				dlg.getTextFieldOuterRadius().setText(String.valueOf(donut.getRadius()));
+				dlg.getTextFieldInnerRadius().setText(String.valueOf(donut.getInnerRadius()));
 				dlg.setModal(true);
 				dlg.setVisible(true);
 			} else if(selected instanceof Circle) {
 				Circle circle = (Circle) selected;
 				DlgCircle dlg = new DlgCircle();
 				dlg.setCircle(circle);
+				dlg.getTextFieldCircleCenterX().setText(String.valueOf(circle.getCenter().getX()));
+				dlg.getTextFieldCircleCenterY().setText(String.valueOf(circle.getCenter().getY()));
+				dlg.getTextFieldRadius().setText(String.valueOf(circle.getRadius()));
 				dlg.setModal(true);
 				dlg.setVisible(true);
 			}

@@ -25,7 +25,7 @@ public class DlgPoint extends JDialog {
 	public boolean commited;
 	static Point point;
 	private final JPanel contentPanel = new JPanel();
-	private JTextField textFieldPointX;
+	JTextField textFieldPointX;
 	private JTextField textFieldPointY;
 
 	/**
@@ -85,14 +85,14 @@ public class DlgPoint extends JDialog {
 			contentPanel.add(lblPointY, gbc_lblPointY);
 		}
 		{
-			textFieldPointY = new JTextField();
-			textFieldPointY.setText(String.valueOf(DrawingPanel.getPointY()));
+			setTextFieldPointY(new JTextField());
+			getTextFieldPointY().setText(String.valueOf(DrawingPanel.getPointY()));
 			GridBagConstraints gbc_textFieldPointY = new GridBagConstraints();
 			gbc_textFieldPointY.fill = GridBagConstraints.HORIZONTAL;
 			gbc_textFieldPointY.gridx = 1;
 			gbc_textFieldPointY.gridy = 1;
-			contentPanel.add(textFieldPointY, gbc_textFieldPointY);
-			textFieldPointY.setColumns(10);
+			contentPanel.add(getTextFieldPointY(), gbc_textFieldPointY);
+			getTextFieldPointY().setColumns(10);
 		}
 		{
 			JPanel buttonPane = new JPanel();
@@ -104,7 +104,7 @@ public class DlgPoint extends JDialog {
 					public void actionPerformed(ActionEvent e) {
 						try {
 							int x = Integer.parseInt(textFieldPointX.getText());
-							int y = Integer.parseInt(textFieldPointY.getText());
+							int y = Integer.parseInt(getTextFieldPointY().getText());
 							
 							if(x>0 && y>0) {
 								point.setX(x);
@@ -157,6 +157,14 @@ public class DlgPoint extends JDialog {
 	}
 	public void setCommited(boolean commited) {
 		this.commited = commited;
+	}
+
+	public JTextField getTextFieldPointY() {
+		return textFieldPointY;
+	}
+
+	public void setTextFieldPointY(JTextField textFieldPointY) {
+		this.textFieldPointY = textFieldPointY;
 	}
 
 }

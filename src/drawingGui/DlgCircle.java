@@ -14,6 +14,8 @@ import geometry.Shape;
 
 import java.awt.GridBagLayout;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import javax.swing.JTextField;
@@ -41,6 +43,30 @@ public class DlgCircle extends JDialog {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+
+	public JTextField getTextFieldCircleCenterX() {
+		return textFieldCircleCenterX;
+	}
+
+	public void setTextFieldCircleCenterX(JTextField textFieldCircleCenterX) {
+		this.textFieldCircleCenterX = textFieldCircleCenterX;
+	}
+
+	public JTextField getTextFieldCircleCenterY() {
+		return textFieldCircleCenterY;
+	}
+
+	public void setTextFieldCircleCenterY(JTextField textFieldCircleCenterY) {
+		this.textFieldCircleCenterY = textFieldCircleCenterY;
+	}
+
+	public JTextField getTextFieldRadius() {
+		return textFieldRadius;
+	}
+
+	public void setTextFieldRadius(JTextField textFieldRadius) {
+		this.textFieldRadius = textFieldRadius;
 	}
 
 	/**
@@ -132,6 +158,25 @@ public class DlgCircle extends JDialog {
 				okButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						try {
+							int radius = Integer.parseInt(textFieldRadius.getText());
+							int centerX = Integer.parseInt(textFieldCircleCenterX.getText());
+							int centerY = Integer.parseInt(textFieldCircleCenterY.getText());
+							
+							if(radius>0 && centerX>0 && centerY>0) {
+								circle.setCenter(new Point(centerX, centerY));
+								circle.setRadius(radius);
+								commited = true;
+								dispose();
+							}
+							else {
+								JOptionPane.showMessageDialog(null, "Wrong data entry", "Error", JOptionPane.ERROR_MESSAGE);
+							}
+						}
+						catch(Exception ex) {
+							JOptionPane.showMessageDialog(null, "Wrong data entry", "Error", JOptionPane.ERROR_MESSAGE);
+						}
+						/*
+						try {
 							circle.setRadius(Integer.parseInt(textFieldRadius.getText()));
 						} catch (Exception e1) {
 							e1.printStackTrace();
@@ -139,6 +184,7 @@ public class DlgCircle extends JDialog {
 						circle.setCenter(new Point(Integer.parseInt(textFieldCircleCenterX.getText()), Integer.parseInt(textFieldCircleCenterY.getText())));
 						commited = true;
 						dispose();
+						*/
 					}
 				});
 				okButton.setActionCommand("OK");

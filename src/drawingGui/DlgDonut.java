@@ -32,6 +32,38 @@ public class DlgDonut extends JDialog {
 	private JTextField textFieldInnerRadius;
 	private boolean commited;
 
+	public JTextField getTextFieldDonutCenterX() {
+		return textFieldDonutCenterX;
+	}
+
+	public void setTextFieldDonutCenterX(JTextField textFieldDonutCenterX) {
+		this.textFieldDonutCenterX = textFieldDonutCenterX;
+	}
+
+	public JTextField getTextFieldDonutCenterY() {
+		return textFieldDonutCenterY;
+	}
+
+	public void setTextFieldDonutCenterY(JTextField textFieldDonutCenterY) {
+		this.textFieldDonutCenterY = textFieldDonutCenterY;
+	}
+
+	public JTextField getTextFieldOuterRadius() {
+		return textFieldOuterRadius;
+	}
+
+	public void setTextFieldOuterRadius(JTextField textFieldOuterRadius) {
+		this.textFieldOuterRadius = textFieldOuterRadius;
+	}
+
+	public JTextField getTextFieldInnerRadius() {
+		return textFieldInnerRadius;
+	}
+
+	public void setTextFieldInnerRadius(JTextField textFieldInnerRadius) {
+		this.textFieldInnerRadius = textFieldInnerRadius;
+	}
+
 	/**
 	 * Launch the application.
 	 */
@@ -110,14 +142,7 @@ public class DlgDonut extends JDialog {
 		}
 		{
 			textFieldOuterRadius = new JTextField();
-			if(donut != null) {
-				if(donut.getRadius() == -1) {
-					textFieldOuterRadius.setText("");
-				}
-				else {
-					textFieldOuterRadius.setText(String.valueOf(donut.getRadius()));
-				}
-			}
+			//textFieldOuterRadius.setText(String.valueOf(DrawingPanel.get));
 			GridBagConstraints gbc_textFieldOuterRadius = new GridBagConstraints();
 			gbc_textFieldOuterRadius.insets = new Insets(0, 0, 5, 0);
 			gbc_textFieldOuterRadius.fill = GridBagConstraints.HORIZONTAL;
@@ -160,6 +185,30 @@ public class DlgDonut extends JDialog {
 				JButton okButton = new JButton("OK");
 				okButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
+						try {
+							int radiusO = Integer.parseInt(textFieldOuterRadius.getText());
+							int radiusI = Integer.parseInt(textFieldInnerRadius.getText());
+							int centerX = Integer.parseInt(textFieldDonutCenterX.getText());
+							int centerY = Integer.parseInt(textFieldDonutCenterY.getText());
+							
+							if(radiusI==radiusO || radiusI>radiusO) {
+								JOptionPane.showMessageDialog(null, "Inner radius value must be smaller than outer radius value", "Error", JOptionPane.ERROR_MESSAGE);
+							}
+							else if(radiusI>0 && radiusO>0 && centerX>0 && centerY>0) {
+								donut.setCenter(new Point(centerX, centerY));
+								donut.setRadius(radiusO);
+								donut.setInnerRadius(radiusI);
+								commited = true;
+								dispose();
+							}
+							else {
+								JOptionPane.showMessageDialog(null, "Wrong data entry", "Error", JOptionPane.ERROR_MESSAGE);
+							}
+						}
+						catch(Exception ex) {
+							JOptionPane.showMessageDialog(null, "Wrong data entry", "Error", JOptionPane.ERROR_MESSAGE);
+						}
+						/*
 						if((Integer.parseInt(textFieldInnerRadius.getText()) > (Integer.parseInt(textFieldOuterRadius.getText())))) {
 							JOptionPane.showMessageDialog(null, "Inner radius value exceeds outer radius value", "Error", JOptionPane.ERROR_MESSAGE);
 						}
@@ -178,6 +227,7 @@ public class DlgDonut extends JDialog {
 						}
 						commited = true;
 						dispose();
+						*/
 					}
 				});
 				okButton.setActionCommand("OK");
